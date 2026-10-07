@@ -1,0 +1,31 @@
+{
+  "name": "gruvbox-codemirror-theme",
+  "version": "0.1.0",
+  "description": "A port of the Gruvbox color theme for the CodeMirror editor.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "screenshots": "node tools/screenshots/render.mjs"
+  },
+  "keywords": [
+    "codemirror",
+    "editor",
+    "gruvbox",
+    "theme",
+    "dark",
+    "light"
+  ],
+  "author": "Pierre-Alain Castella",
+  "license": "MIT",
+  "dependencies": {
+    "@codemirror/language": "^6.12.4",
+    "@codemirror/state": "^6.7.6",
+    "@codemirror/view": "^6.43.13",
+    "@lezer/highlight": "^1.2.5"
+  },
+  "devDependencies": {
+    "@codemirror/lang-rust": "^6.0.2",
+    "esbuild": "^0.28.2",
+    "playwright-core": "^1.63.0"
+  }
+}
