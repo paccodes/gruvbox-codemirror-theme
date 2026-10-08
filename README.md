@@ -4,7 +4,12 @@
   <img src="./assets/gruvbox.png" width="500" >
 </div>
 
-A port of the retro groove Gruvbox color theme, including both flavors `Dark` and `Light`.
+A port of the retro groove Gruvbox color theme, including both flavors `Dark` and `Light`, each in three contrasts: `Hard`, medium (default) and `Soft`.
+
+<div align="center">
+  <h3>Dark Hard</h3>
+  <img src="./assets/dark-hard.png" width="1024" >
+</div>
 
 <div align="center">
   <h3>Dark</h3>
@@ -12,19 +17,38 @@ A port of the retro groove Gruvbox color theme, including both flavors `Dark` an
 </div>
 
 <div align="center">
+  <h3>Dark Soft</h3>
+  <img src="./assets/dark-soft.png" width="1024" >
+</div>
+
+<div align="center">
+  <h3>Light Hard</h3>
+  <img src="./assets/light-hard.png" width="1024" >
+</div>
+
+<div align="center">
   <h3>Light</h3>
   <img src="./assets/light.png" width="1024" >
 </div>
 
+<div align="center">
+  <h3>Light Soft</h3>
+  <img src="./assets/light-soft.png" width="1024" >
+</div>
+
 ## API and usage
 
-Both flavors expose the same API.
+Both flavors expose the same API, with `Hard` and `Soft` variants alongside the default medium contrast. Only the editor background (and the panel color derived from it) changes between contrasts; the highlight style is shared.
 
 ### Enable both the editor theme and the highlight style
 
 ```ts
+gruvboxDarkHard: Extension;
 gruvboxDark: Extension;
+gruvboxDarkSoft: Extension;
+gruvboxLightHard: Extension;
 gruvboxLight: Extension;
+gruvboxLightSoft: Extension;
 ```
 
 ```js
@@ -42,8 +66,12 @@ new EditorView({
 ### Enable just the editor theme:
 
 ```ts
+gruvboxDarkHardTheme: Extension;
 gruvboxDarkTheme: Extension;
+gruvboxDarkSoftTheme: Extension;
+gruvboxLightHardTheme: Extension;
 gruvboxLightTheme: Extension;
+gruvboxLightSoftTheme: Extension;
 ```
 
 ```js

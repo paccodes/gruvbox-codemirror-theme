@@ -61,84 +61,103 @@ export const lightColors = {
   neutralOrange,
 };
 
-export const gruvboxLightTheme = EditorView.theme(
-  {
-    "&": {
-      backgroundColor: light0,
-      color: dark1,
-    },
-    ".cm-content": {
-      caretColor: dark1,
-    },
-    ".cm-cursor, .cm-dropCursor": {
-      borderLeftColor: dark1,
-    },
-    "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
-      {
-        backgroundColor: light3,
+const createGruvboxLightTheme = (
+  background: string,
+  panel: string
+): Extension =>
+  EditorView.theme(
+    {
+      "&": {
+        backgroundColor: background,
+        color: dark1,
       },
-    ".cm-panels": {
-      backgroundColor: light0Hard,
-      color: dark1,
-    },
-    ".cm-panels.cm-panels-top": {
-      borderBottom: `2px solid ${light0Hard}`,
-    },
-    ".cm-panels.cm-panels-bottom": {
-      borderTop: `2px solid ${light0Hard}`,
-    },
-    ".cm-searchMatch": {
-      backgroundColor: light2,
-    },
-    ".cm-searchMatch.cm-searchMatch-selected, .cm-searchMatch.cm-searchMatch-selected *":
-      {
-        backgroundColor: fadedOrange,
-        color: light0,
+      ".cm-content": {
+        caretColor: dark1,
       },
-    ".cm-activeLine": { backgroundColor: light1 },
-    ".cm-selectionMatch": { backgroundColor: light1 },
-    "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
-      backgroundColor: light0Hard,
-      outline: `1px solid ${gray}`,
-      fontWeight: "bold",
-    },
-    ".cm-gutters": {
-      backgroundColor: light0,
-      color: light4,
-      border: "none",
-    },
-    ".cm-activeLineGutter": {
-      color: fadedYellow,
-      backgroundColor: light0,
-    },
-    ".cm-foldPlaceholder": {
-      backgroundColor: light1,
-      color: gray,
-      fontStyle: "italic",
-      border: "none",
-    },
-    ".cm-tooltip": {
-      backgroundColor: light1,
-      border: "none",
-    },
-    ".cm-tooltip .cm-tooltip-arrow:before": {
-      borderTopColor: "transparent",
-      borderBottomColor: "transparent",
-    },
-    ".cm-tooltip .cm-tooltip-arrow:after": {
-      borderTopColor: light1,
-      borderBottomColor: light1,
-    },
-    ".cm-tooltip-autocomplete": {
-      backgroundColor: light2,
-      "& > ul > li[aria-selected]": {
-        backgroundColor: fadedBlue,
-        color: light0,
+      ".cm-cursor, .cm-dropCursor": {
+        borderLeftColor: dark1,
+      },
+      "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
+        {
+          backgroundColor: light3,
+        },
+      ".cm-panels": {
+        backgroundColor: panel,
+        color: dark1,
+      },
+      ".cm-panels.cm-panels-top": {
+        borderBottom: `2px solid ${panel}`,
+      },
+      ".cm-panels.cm-panels-bottom": {
+        borderTop: `2px solid ${panel}`,
+      },
+      ".cm-searchMatch": {
+        backgroundColor: light2,
+      },
+      ".cm-searchMatch.cm-searchMatch-selected, .cm-searchMatch.cm-searchMatch-selected *":
+        {
+          backgroundColor: fadedOrange,
+          color: background,
+        },
+      ".cm-activeLine": { backgroundColor: light1 },
+      ".cm-selectionMatch": { backgroundColor: light1 },
+      "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
+        backgroundColor: panel,
+        outline: `1px solid ${gray}`,
         fontWeight: "bold",
       },
+      ".cm-gutters": {
+        backgroundColor: background,
+        color: light4,
+        border: "none",
+      },
+      ".cm-activeLineGutter": {
+        color: fadedYellow,
+        backgroundColor: background,
+      },
+      ".cm-foldPlaceholder": {
+        backgroundColor: light1,
+        color: gray,
+        fontStyle: "italic",
+        border: "none",
+      },
+      ".cm-tooltip": {
+        backgroundColor: light1,
+        border: "none",
+      },
+      ".cm-tooltip .cm-tooltip-arrow:before": {
+        borderTopColor: "transparent",
+        borderBottomColor: "transparent",
+      },
+      ".cm-tooltip .cm-tooltip-arrow:after": {
+        borderTopColor: light1,
+        borderBottomColor: light1,
+      },
+      ".cm-tooltip-autocomplete": {
+        backgroundColor: light2,
+        "& > ul > li[aria-selected]": {
+          backgroundColor: fadedBlue,
+          color: background,
+          fontWeight: "bold",
+        },
+      },
     },
-  },
-  { dark: false }
+    { dark: false }
+  );
+
+export const gruvboxLightHardTheme: Extension = createGruvboxLightTheme(
+  light0Hard,
+  light0
+);
+
+export const gruvboxLightTheme: Extension = createGruvboxLightTheme(
+  light0,
+  light0Hard
+);
+
+export const gruvboxLightSoftTheme: Extension = createGruvboxLightTheme(
+  light0Soft,
+  light0
 );
 
 export const gruvboxLightHighlightStyle = HighlightStyle.define([
@@ -232,7 +251,17 @@ export const gruvboxLightHighlightStyle = HighlightStyle.define([
   { tag: tags.special(tags.variableName), color: fadedOrange },
 ]);
 
+export const gruvboxLightHard: Extension = [
+  gruvboxLightHardTheme,
+  syntaxHighlighting(gruvboxLightHighlightStyle),
+];
+
 export const gruvboxLight: Extension = [
   gruvboxLightTheme,
+  syntaxHighlighting(gruvboxLightHighlightStyle),
+];
+
+export const gruvboxLightSoft: Extension = [
+  gruvboxLightSoftTheme,
   syntaxHighlighting(gruvboxLightHighlightStyle),
 ];

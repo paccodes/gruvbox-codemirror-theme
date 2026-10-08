@@ -61,84 +61,100 @@ export const darkColors = {
   neutralOrange,
 };
 
-export const gruvboxDarkTheme = EditorView.theme(
-  {
-    "&": {
-      backgroundColor: dark0,
-      color: light1,
-    },
-    ".cm-content": {
-      caretColor: light1,
-    },
-    ".cm-cursor, .cm-dropCursor": {
-      borderLeftColor: light1,
-    },
-    "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
-      {
-        backgroundColor: dark3,
+const createGruvboxDarkTheme = (background: string, panel: string): Extension =>
+  EditorView.theme(
+    {
+      "&": {
+        backgroundColor: background,
+        color: light1,
       },
-    ".cm-panels": {
-      backgroundColor: dark0Hard,
-      color: light1,
-    },
-    ".cm-panels.cm-panels-top": {
-      borderBottom: `2px solid ${dark0Hard}`,
-    },
-    ".cm-panels.cm-panels-bottom": {
-      borderTop: `2px solid ${dark0Hard}`,
-    },
-    ".cm-searchMatch": {
-      backgroundColor: dark2,
-    },
-    ".cm-searchMatch.cm-searchMatch-selected, .cm-searchMatch.cm-searchMatch-selected *":
-      {
-        backgroundColor: brightOrange,
-        color: dark0,
+      ".cm-content": {
+        caretColor: light1,
       },
-    ".cm-activeLine": { backgroundColor: dark1 },
-    ".cm-selectionMatch": { backgroundColor: dark1 },
-    "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
-      backgroundColor: dark0Hard,
-      outline: `1px solid ${gray}`,
-      fontWeight: "bold",
-    },
-    ".cm-gutters": {
-      backgroundColor: dark0,
-      color: dark4,
-      border: "none",
-    },
-    ".cm-activeLineGutter": {
-      color: brightYellow,
-      backgroundColor: dark0,
-    },
-    ".cm-foldPlaceholder": {
-      backgroundColor: dark1,
-      color: gray,
-      fontStyle: "italic",
-      border: "none",
-    },
-    ".cm-tooltip": {
-      backgroundColor: dark1,
-      border: "none",
-    },
-    ".cm-tooltip .cm-tooltip-arrow:before": {
-      borderTopColor: "transparent",
-      borderBottomColor: "transparent",
-    },
-    ".cm-tooltip .cm-tooltip-arrow:after": {
-      borderTopColor: dark1,
-      borderBottomColor: dark1,
-    },
-    ".cm-tooltip-autocomplete": {
-      backgroundColor: dark2,
-      "& > ul > li[aria-selected]": {
-        backgroundColor: brightBlue,
-        color: dark0,
+      ".cm-cursor, .cm-dropCursor": {
+        borderLeftColor: light1,
+      },
+      "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
+        {
+          backgroundColor: dark3,
+        },
+      ".cm-panels": {
+        backgroundColor: panel,
+        color: light1,
+      },
+      ".cm-panels.cm-panels-top": {
+        borderBottom: `2px solid ${panel}`,
+      },
+      ".cm-panels.cm-panels-bottom": {
+        borderTop: `2px solid ${panel}`,
+      },
+      ".cm-searchMatch": {
+        backgroundColor: dark2,
+      },
+      ".cm-searchMatch.cm-searchMatch-selected, .cm-searchMatch.cm-searchMatch-selected *":
+        {
+          backgroundColor: brightOrange,
+          color: background,
+        },
+      ".cm-activeLine": { backgroundColor: dark1 },
+      ".cm-selectionMatch": { backgroundColor: dark1 },
+      "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
+        backgroundColor: panel,
+        outline: `1px solid ${gray}`,
         fontWeight: "bold",
       },
+      ".cm-gutters": {
+        backgroundColor: background,
+        color: dark4,
+        border: "none",
+      },
+      ".cm-activeLineGutter": {
+        color: brightYellow,
+        backgroundColor: background,
+      },
+      ".cm-foldPlaceholder": {
+        backgroundColor: dark1,
+        color: gray,
+        fontStyle: "italic",
+        border: "none",
+      },
+      ".cm-tooltip": {
+        backgroundColor: dark1,
+        border: "none",
+      },
+      ".cm-tooltip .cm-tooltip-arrow:before": {
+        borderTopColor: "transparent",
+        borderBottomColor: "transparent",
+      },
+      ".cm-tooltip .cm-tooltip-arrow:after": {
+        borderTopColor: dark1,
+        borderBottomColor: dark1,
+      },
+      ".cm-tooltip-autocomplete": {
+        backgroundColor: dark2,
+        "& > ul > li[aria-selected]": {
+          backgroundColor: brightBlue,
+          color: background,
+          fontWeight: "bold",
+        },
+      },
     },
-  },
-  { dark: true }
+    { dark: true }
+  );
+
+export const gruvboxDarkHardTheme: Extension = createGruvboxDarkTheme(
+  dark0Hard,
+  dark0
+);
+
+export const gruvboxDarkTheme: Extension = createGruvboxDarkTheme(
+  dark0,
+  dark0Hard
+);
+
+export const gruvboxDarkSoftTheme: Extension = createGruvboxDarkTheme(
+  dark0Soft,
+  dark0
 );
 
 export const gruvboxDarkHighlightStyle = HighlightStyle.define([
@@ -232,7 +248,17 @@ export const gruvboxDarkHighlightStyle = HighlightStyle.define([
   { tag: tags.special(tags.variableName), color: brightOrange },
 ]);
 
+export const gruvboxDarkHard: Extension = [
+  gruvboxDarkHardTheme,
+  syntaxHighlighting(gruvboxDarkHighlightStyle),
+];
+
 export const gruvboxDark: Extension = [
   gruvboxDarkTheme,
+  syntaxHighlighting(gruvboxDarkHighlightStyle),
+];
+
+export const gruvboxDarkSoft: Extension = [
+  gruvboxDarkSoftTheme,
   syntaxHighlighting(gruvboxDarkHighlightStyle),
 ];
